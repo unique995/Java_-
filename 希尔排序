@@ -1,0 +1,37 @@
+
+
+
+public static void shellSort(int []arr){
+   int gap = arr.length;
+   while(true){
+       gap = gap / 3 +1;
+       insertIn(arr,gap);
+       if(gap == 1){
+           break;
+       }
+   }
+}
+public static void insertIn(int []arr,int gap){
+    for(int i = gap;i < arr.length;i++){
+        int key = arr[i];
+        int j;
+        for(j = i-gap;j >= 0;j-= gap ){
+            if (key >= arr[j]){
+                break;
+            }
+            else{
+                arr[j + gap] = arr[j];
+            }
+        }
+        arr[j+gap] = key;
+    }
+}
+public static void main(String[] args) {
+    int [] arr = new int[] {5,3,6,1,2};
+shellSort(arr);
+        for(int x = 0;x < arr.length;x++){
+            System.out.print(arr[x]+",");
+        }
+
+    }
+
