@@ -1,0 +1,37 @@
+public class NewSort {
+    public static int getMiddle(int[] arr, int low,int high)
+    {
+        int temp = arr[low]; //此处把数组的第一个数作为基准值
+        while(low < high)
+        {
+            while(low < high && arr[high] > temp)
+            {
+                high--;
+            }
+            arr[low] = arr[high];//比基准值小的数移到低端
+            while(low < high && arr[low] < temp)
+            {
+                low++;
+            }
+            arr[high] = arr[low] ; //比基准值大的数移到高端
+        }
+        arr[low] = temp ; //基准值最后一个记录
+        return low ; // 返回排一次后基准值的新位置
+    }
+        public static void QuickSort(int [] arr,int low,int high) {
+            if(low < high)
+            {
+                int middle = getMiddle(arr,low,high); //将arr数组进行一分为二
+                QuickSort(arr, low, middle-1);   //对低字段表进行递归排序
+                QuickSort(arr, middle+1, high); //对高字段表进行递归排序
+            }
+    }
+    public static void main(String[] args) {
+        int [] arr = new int[] {5,3,6,1,2};
+        QuickSort(arr,0,arr.length-1);
+        for(int x = 0;x < arr.length;x++){
+            System.out.print(arr[x]+",");
+        }
+
+    }
+}
