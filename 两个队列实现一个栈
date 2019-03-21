@@ -1,0 +1,46 @@
+import java.util.ArrayDeque;
+import java.util.Queue;
+public class Solution {
+    Queue<Integer> queue1 = new ArrayDeque<Integer>();
+    Queue<Integer> queue2 = new ArrayDeque<Integer>();
+    public void push(int node){
+        if(queue1.isEmpty() && queue2.isEmpty()){ //当两个队列刚开始都为空时，优先考虑队列1
+            queue1.add(node);
+        }
+        if(queue1.isEmpty()){    //如果队列1为空，即让队列2入队
+            queue2.add(node);
+        }
+        if(queue2.isEmpty()){    //如果队列2为空，即让队列1入队
+            queue1.add(node);
+        }
+    }
+    public Integer pop(){
+        if(queue1.isEmpty() && queue2.isEmpty()){     //两个队列都没有元素，即栈为空
+            System.out.println("this is an empty stack");
+        }
+        if(queue1.isEmpty()){              //队列1为空，即把队列2中的除了队尾的那一个元素其他的元素入队于队列1中
+            while (queue2.size()>1){
+                queue1.add(queue2.poll());
+            }
+            return queue2.poll();
+        }
+        if(queue2.isEmpty()){             //队列2为空，即把队列1中的除了队尾的那一个元素其他的元素入队于队列2中
+            while (queue1.size()>1){
+                queue2.add(queue1.poll());
+            }
+            return queue1.poll();
+        }
+        return (Integer) null;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        solution.push(1);
+        solution.push(2);
+        solution.push(3);
+        System.out.println(solution.pop());
+        System.out.println(solution.pop());
+        solution.push(4);
+        System.out.println(solution.pop());
+        System.out.println(solution.pop());
+    }
