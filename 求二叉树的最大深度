@@ -1,0 +1,16 @@
+class TreeNode{
+    TreeNode left;
+    TreeNode right;
+    int val;
+}
+
+
+
+public int maxDepth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.left);
+        return Math.max(left,right)+1;
+    }
