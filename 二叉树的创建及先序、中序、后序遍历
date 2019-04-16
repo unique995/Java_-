@@ -1,0 +1,93 @@
+public class Node {
+	public int data;
+	public Node left;
+	public Node right;
+	public Node(int data){
+		this.data = data;
+		this.left = null;
+		this.right = null;
+	}
+	public Node getLeft() {
+        return left;
+    }
+
+    public void setLeft(Node left) {
+        this.left = left;
+    }
+
+    public Node getRight() {
+        return right;
+    }
+
+    public void setRight(Node right) {
+        this.right = right;
+    }
+
+    public int getData() {
+        return data;
+    }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+}
+public class Tree{
+
+    public static void main(String[] args) {
+        Tree tree = new Tree();
+        int []datas = new int[]{1,2,3,4,5,6,7,8,9};
+        List<Node> nodeList = new LinkedList<>();
+        tree.creatBinaryTree(datas,nodeList);
+        Node root = nodeList.get(0);
+        System.out.println("先序遍历：");
+        tree.preOrder(root);
+        System.out.println();
+        System.out.println("中序遍历：");
+        tree.inOrder(root);
+        System.out.println();
+        System.out.println("后序遍历：");
+        tree.postOrder(root);
+    }
+    public static void creatBinaryTree(int[] datas, List<Node> nodeList){
+        for (int index = 0;index < datas.length;index++){
+            Node node = new Node(datas[index]);
+            nodeList.add(node);
+        }
+        for (int nodeIndex = 0;nodeIndex < nodeList.size()/2-1;nodeIndex++){
+            nodeList.get(nodeIndex).setLeft(nodeList.get(nodeIndex*2+1));
+            nodeList.get(nodeIndex).setRight(nodeList.get(nodeIndex*2+2));
+        }
+        int nodeIndex = nodeList.size()/2-1;
+        nodeList.get(nodeIndex).setLeft(nodeList.get(nodeIndex*2+1));
+        if(nodeList.size() % 2 == 1){
+            nodeList.get(nodeIndex).setRight(nodeList.get(nodeIndex*2+2));
+        }
+    }
+    public static void preOrder(Node node){
+        if(node == null){
+            return;
+        }
+        System.out.print(node.getData()+" ");
+        preOrder(node.getLeft());
+        preOrder(node.getRight());
+    }
+    public static void inOrder(Node node){
+        if(node == null){
+            return;
+        }
+        inOrder(node.getLeft());
+        System.out.print(node.getData()+" ");
+        inOrder(node.getRight());
+    }
+    public static void postOrder(Node node){
+        if(node == null){
+            return;
+        }
+        postOrder(node.getLeft());
+        postOrder(node.getRight());
+        System.out.print(node.getData()+" ");
+    }
+}
+
+
+
