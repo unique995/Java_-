@@ -23,3 +23,17 @@ public static int numOfTreeNode(TreeNode root){
     }
     
     
+    
+     int numsOfkLevelTreeNode(TreeNode root,int k){
+            if(root == null||k<1){
+                return 0;
+            }
+            if(k==1){
+                return 1;
+            }
+            int numsLeft = numsOfkLevelTreeNode(root.left,k-1);
+            int numsRight = numsOfkLevelTreeNode(root.right,k-1);
+            return numsLeft + numsRight;
+        }
+    
+    
