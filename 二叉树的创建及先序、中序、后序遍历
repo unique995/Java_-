@@ -49,17 +49,22 @@ public class Tree{
         tree.postOrder(root);
     }
     public static void creatBinaryTree(int[] datas, List<Node> nodeList){
+     //将数组变成node节点
         for (int index = 0;index < datas.length;index++){
             Node node = new Node(datas[index]);
             nodeList.add(node);
         }
+	//给所有父节点设定子节点
         for (int nodeIndex = 0;nodeIndex < nodeList.size()/2-1;nodeIndex++){
+	//编号为n的节点他的左子节点编号为2*n 右子节点编号为2*n+1 但是因为list从0开始编号，所以还要+1
+  //这里父节点有1（2,3）,2（4,5）,3（6,7）,4（8,9） 但是最后一个父节点有可能没有右子节点 需要单独处理
             nodeList.get(nodeIndex).setLeft(nodeList.get(nodeIndex*2+1));
             nodeList.get(nodeIndex).setRight(nodeList.get(nodeIndex*2+2));
         }
+	//单独处理最后一个父节点 因为它有可能没有右子节点
         int nodeIndex = nodeList.size()/2-1;
-        nodeList.get(nodeIndex).setLeft(nodeList.get(nodeIndex*2+1));
-        if(nodeList.size() % 2 == 1){
+        nodeList.get(nodeIndex).setLeft(nodeList.get(nodeIndex*2+1));//先设置左子节点
+        if(nodeList.size() % 2 == 1){//如果有奇数个节点，最后一个父节点才有右子节点
             nodeList.get(nodeIndex).setRight(nodeList.get(nodeIndex*2+2));
         }
     }
