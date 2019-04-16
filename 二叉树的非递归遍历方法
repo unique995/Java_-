@@ -1,0 +1,73 @@
+    public static void checkCurrentNode(Node node){
+        System.out.print(node.getData()+" ");
+    }
+    public static void preOrderbyLoop(Node node){   //前序遍历
+        Stack<Node> stack = new Stack<>();
+        Node p = node;
+        while (p != null || !stack.isEmpty()){
+            while (p != null){          //当p不为空时，就读取p的值，并不断更新p为其左子节点，即不断读取左子节点
+                checkCurrentNode(p);
+                stack.push(p);   //将p入栈
+                p = p.getLeft();
+            }
+            if(!stack.isEmpty()){
+                p = stack.pop();
+                p = p.getRight();
+            }
+        }
+    }
+    public static void inOrderbyLoop(Node node){
+        Stack<Node> stack = new Stack<>();
+        Node p = node;
+        while (p != null || !stack.isEmpty()) {
+            while (p != null) {
+                stack.push(p);
+                p = p.getLeft();
+            }
+            if(!stack.isEmpty()) {
+                p = stack.pop();
+                checkCurrentNode(p);
+                p = p.getRight();
+            }
+        }
+    }
+    public static void postOrderbyLoop(Node node){
+        Stack<Node> stack = new Stack<>();
+        Node p = node,prev = node;
+        while (p != null || !stack.isEmpty()) {
+            while (p != null) {
+                stack.push(p);
+                p = p.getLeft();
+            }
+            if(!stack.isEmpty()){
+               Node temp = stack.peek().getRight();
+               if(temp == null || temp == prev){
+                   p = stack.pop();
+                   checkCurrentNode(p);
+                   prev = p;
+                   p = null;
+               }else {
+                   p = temp;
+               }
+            }
+        }
+    }
+    public static void cengOrder(Node node){
+        if(node == null){
+            return;
+        }
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.offer(node);      //首先将根节点存入队列
+        //当队列里有值时，每次取出队首的node打印，打印之后判断node是否有子节点，若有，则将子节点加入队列
+        while (queue.size() > 0){
+            Node node1 = queue.peek();
+            queue.poll();       //取出队首元素并打印
+            System.out.print(node1.data+" ");
+            if(node1.left != null){   //如果有左子节点，则将其存入队列
+                queue.offer(node1.left);
+            }
+            if(node1.right != null){   //如果有右子节点，则将其存入队列
+                queue.offer(node1.right);
+            }
+        }
+    }
