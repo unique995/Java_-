@@ -1,0 +1,15 @@
+1表示在；0表示不在
+
+
+public static int nodeInRoot(Node root,Node node){
+        if(root == null || node == null){
+            return 0;
+        }
+        if(root.data == node.data){
+            return 1;
+        }
+        if(nodeInRoot(root.left,node) == 1){
+            return 1;
+        }
+        return nodeInRoot(root.right,node);
+    }
