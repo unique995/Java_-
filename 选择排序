@@ -1,5 +1,6 @@
-//假如我们选择吃水果的时候，总是挑最大的，然后依次挑接下来最大的
-//选择排序就是这样，依次找最大的排列
+//不断的从未排序的元素中选择最大（或最小）的元素放入已排好的元素集合中
+//直到未排序中仅剩一个元素为止
+
 public class NewSort {
     public static void SelectSort(int [] arr) {
         for(int i = 0;i < arr.length-1;i++){   // 比较的总的趟数
