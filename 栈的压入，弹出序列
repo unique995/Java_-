@@ -1,0 +1,32 @@
+
+import java.util.Stack;
+public class Solution {
+    public boolean IsPopOrder(int [] pushA,int [] popA) {
+        boolean flag = false;
+        if(pushA != null && popA != null){
+            Stack<Integer> stack = new Stack<Integer>();
+            int i = 0,j = 0;
+                while (j < popA.length){
+                    while (i < pushA.length && pushA[i] != popA[j]){
+                        stack.push(pushA[i]);
+                        i++;
+                    }
+                    i++;
+                    j++;
+                    while (!stack.isEmpty() && j < popA.length){
+                        int top = 0;
+                        if((top = stack.pop()) == popA[j]){
+                            j++;
+                        }else {
+                            stack.push(top);
+                            break;
+                        }
+                    }
+                    if(i >= pushA.length && stack.isEmpty()){
+                        flag = true;
+                    }
+                }
+            }
+            return flag; 
+    }
+}
