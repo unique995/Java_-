@@ -1,36 +1,30 @@
-import java.util.*;
+对于树中的任意一个结点，其两颗子树的高度差不超过1。
+    计算左右两个子树的高度
+    判断是否是平衡数
+    递归实现
 
-/*
-public class TreeNode {
-    int val = 0;
-    TreeNode left = null;
-    TreeNode right = null;
-    public TreeNode(int val) {
-        this.val = val;
-    }
-}*/
+import java.util.*;
 public class Balance {
-    public boolean isBalance(TreeNode root) {
-        // write code here
-        if(root==null){
-            return true;
-        }else{
-            int left = getDeep(root.left);
-            int right = getDeep(root.right);
-            if(Math.abs(left-right)<=1){
-                return isBalance(root.left)&&isBalance(root.right);
-            }else{
-                return false;
-            }
-        }      
-    }
-    public int getDeep(TreeNode root){
-        if(root!=null){
-            int left = getDeep(root.left);
-            int right = getDeep(root.right);
-            return left>right?left+1:right+1;
-        }else{
-            return 0;
-        }
-    }
+public boolean isBalance(TreeNode root) {
+//判断根元素是否为null
+if(root == null){
+return true;
+}
+//获取左边子树高度
+int leftHeight = getTreeHeight(root.left);
+int rightHeight = getTreeHeight(root.right);
+//左右子树的高度大于1表示不是平衡二叉树
+if(Math.abs(leftHeight - rightHeight) > 1){
+return false;
+}
+//isBalance()检查是否平衡
+return isBalance(root.left) && isBalance(root.right);
+}
+//计算树的高度
+public static int getTreeHeight(TreeNode root){
+if(root == null){
+return 0;
+}
+return Math.max(getTreeHeight(root.left), getTreeHeight(root.right)) + 1;
+}
 }
